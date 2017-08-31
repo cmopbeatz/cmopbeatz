@@ -1,0 +1,516 @@
+
+
+<!doctype html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>CashMeOut_Productions</title>
+<style type="text/css">
+<!--
+body {
+	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	background-color: #666;
+	margin: 0;
+	padding: 0;
+
+}
+div#audio_player{
+	width: 560px;
+	height: 60px;
+	border-radius: 4px;
+	visibility: visible;
+	z-index: 2;
+	position: relative;
+	display: inline-block;
+}
+div#rightspeaker{
+	float:right;
+	width:125px;
+	height:60px;
+background: url(images/CMOP_PlayerSkin_Right1.png);
+}
+div#main{
+	float:right;
+	width:310px;	
+	height:60px;
+	background:url(images/CMOP_PlayerSkin_Main1.png);
+	
+}
+div#leftspeaker{
+	float:left;
+	width:125px;
+	height:60px;
+background: url(images/CMOP_PlayerSkin_Left1.png);
+}
+div#audio_controls{
+height:60px;
+width: 560px;	
+}
+/* ~~ Element/tag selectors ~~ */
+ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
+	padding-right: 15px;
+	padding-left: 15px; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
+}
+a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
+	border: none;
+}
+
+/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
+a:link {
+	color:#414958;
+	/* unless you style your links to look extremely unique, it's best to provide underlines for quick visual identification */
+}
+a:visited {
+	color: #4E5869;
+	}
+a:hover, a:active, a:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
+	text-decoration: none;
+}
+
+/* ~~ this container surrounds all other divs giving them their percentage-based width ~~ */
+.container {
+	width: auto;
+	max-width: 1260px;/* a max-width may be desirable to keep this layout from getting too wide on a large monitor. This keeps line length more readable. IE6 does not respect this declaration. */
+	min-width: 780px;/* a min-width may be desirable to keep this layout from getting too narrow. This keeps line length more readable in the side columns. IE6 does not respect this declaration. */
+	background-color: #333; /* the auto value on the sides, coupled with the width, centers the layout. It is not needed if you set the .container's width to 100%. */
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+}
+
+/* ~~the header is not given a width. It will extend the full width of your layout. It contains an image placeholder that should be replaced with your own linked logo~~ */
+.header {
+	background-color: #6F7D94;
+	height: 80px;
+	width: 1280px;
+}
+
+/* ~~ This is the layout information. ~~ 
+
+1) Padding is only placed on the top and/or bottom of the div. The elements within this div have padding on their sides. This saves you from any "box model math". Keep in mind, if you add any side padding or border to the div itself, it will be added to the width you define to create the *total* width. You may also choose to remove the padding on the element in the div and place a second div within it with no width and the padding necessary for your design.
+
+*/
+.content {
+	width: 1280px;
+	padding-top: 10px;
+	padding-right: 0;
+	padding-bottom: 10px;
+	padding-left: 0;
+	height: 720px;
+}
+
+/* ~~ This grouped selector gives the lists in the .content area space ~~ */
+.content ul, .content ol { 
+	padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
+}
+
+/* ~~ The footer ~~ */
+.footer {
+	background-color: #6F7D94;
+	height: 40px;
+	width: 1280px;
+	padding-top: 10px;
+	padding-right: 0;
+	padding-bottom: 10px;
+	padding-left: 0;
+}
+
+/* ~~ miscellaneous float/clear classes ~~ */
+.fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* this class can be used to float an element left in your page. The floated element must precede the element it should be next to on the page. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* this class can be placed on a <br /> or empty div as the final element following the last floated div (within the #container) if the #footer is removed or taken out of the #container */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
+div#m_Player{
+	width: 740px;
+	height: auto;
+	float: left;	
+	
+}
+
+/*[[[[CSS Below pertains to mpcontrols.js & MP CONTROL SCHEME 01]]]]*/ 
+/*nav {
+background-color:rgb(250,250,250);
+width:640px;
+padding-bottom:3px;	
+}
+#defaultBar{
+width:640px;
+position:relative;
+background-color:#606060;
+height:10px;	
+}
+
+#progressBar{
+	position:absolute;
+	height:10px;
+	background-color:#3498db;	
+	width:0px;
+}
+
+#playButton{
+	background-color: rgb(250,250,250);
+	border: none;
+	border: none;
+	height: 32px;
+	width: 32px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-image: url(images/CMOP_Play.png);		
+}
+#muteButton{
+	background-color: rgb(250,250,250);
+	border: none;
+	height: 32px;
+	width: 32px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-image: url(images/CMOP_SpeakerMuted.png);	
+}
+
+#muteButton:active,#playButton:active{
+position:relative;
+top:2px;
+}*/
+/*-------------END MP CONTROL SCHEME 02------------------*/
+
+/*[[[[CSS Below pertains to mpcontrols-alt.js & MP CONTROL SCHEME 02]]]]*/ 
+
+button {
+	border: none;
+	cursor: pointer;
+	outline: none;
+	display: block;
+	float:left;
+	margin: 26px 10px 0px 0px; 
+}
+input {outline:none;   }
+
+
+button#playpausebtn{
+	background: url(images/CMOP_Pause.png) no-repeat;
+	display:block;
+	width: 24px;
+	height: 24px;
+	
+	}
+
+button#mutebtn{
+background:url(images/CMOP_SpeakerMuted.png) no-repeat;
+float:right;
+display:block;
+width:24px;
+height:24px;
+}
+
+input#seekslider{
+	width: 500px;
+	height: 5px;
+	margin: 3px 0px 0px 30px;
+	left: 236px;
+	top: 298px;
+	
+			}
+input#volumeslider{
+	width: 80px;
+	margin:28px 5px 0px 0px;
+	border-bottom: #245 3px solid;
+	float: right;
+	display: block;
+}
+div#timebox{
+	float: left;
+	width: 80px;
+	height: 14px;
+	margin: 28px 2px 0px 0px;
+	background: #000;
+	text-align: center;
+	color: #09F;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 10px;
+	border-bottom: #245 3px solid;
+	display: block;
+	}
+div#trackwrap{
+	width: 500px;
+	height: 160px;
+	margin-left: 30px;
+}
+div#AdvOptions{
+	margin-left: 38px;
+	width: 560px;
+	height: 250px;
+	overflow: hidden;
+	float: left;
+}
+	
+	div#infowrap{
+	float: right;
+	margin-left: 120px;
+	width: 320px;
+	height: 160px;
+	position: absolute;
+	color: #FFF;
+	background-color: #000;
+	border: 2px ridge #FFF;
+			}
+			div#trackbox_selector{
+			width: 160px;
+			height:159px;
+			overflow: hidden;
+			}
+	select#trackbox{
+	float: left;
+	width: 160px;
+	height: 160px;
+	overflow: auto;
+	color: #FFF;
+	background-image: url(CMO_P-bkg.jpg);
+	background-position: center;
+			}
+div#buyLinks{
+	width: 54px;
+	height: 160px;
+	float: right;
+	background-image: url(images/CMO_P-buyLinks-Bkgrnd.png);
+}
+div#addToCart{
+	height: 42px;
+	width: 43px;
+	margin-left: 5px;
+	margin-top: 6px;
+}
+div#soundCloud{
+	height:52px;
+	width:49px;
+	margin-left: 1px;
+	margin-top: 6px;
+
+}
+div#eMail{
+height:;
+width:;	
+}
+	div#textbox{
+	width: 320px;
+	height: 30px;
+	color: #333;
+	font-family: Arial, Helvetica, sans-serif;
+	background-image: none;
+			}
+	div#legal_Panel{
+	width: 400px;
+	height: 200px;
+	position: absolute;
+	background-color: #CCC;
+	float: right;
+	right: 0px;
+	bottom: 0px;
+	margin-right: 220px;
+		}
+input[type='range']{
+	-webkit-appearance: none !important;
+	background: #000;
+	height: 13px;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-color: #FFF;
+	border-right-color: #FFF;
+	border-bottom-color: #FFF;
+	border-left-color: #FFF;	
+}
+input[type='range']::-ms-fill-lower{
+	background:#000;
+}
+input[type='range']::-ms-fill-upper{
+	background:#000;
+}
+input[type='range']::-moz-range-track{
+	border:none;
+	background:#000;
+}
+input[type='range']::-webkit-slider-thumb{
+	-webkit-appearance:none !important;
+	background:#000;
+	border:#FFF;
+	height:11px;
+	width:11px;
+	cursor:pointer;
+}
+input[type='range']::-moz-range-thumb{
+	background:#000;
+	height:11px;
+	width:11px;
+	cursor:pointer;
+}
+input[type='range']::-ms-thumb{
+	-webkit-appearance:none !important;
+	background:radial-gradient(#FFF, #333);
+	height:11px;
+	width:11px;
+	cursor:pointer;
+}
+
+
+
+/*-------------------------END MP CONTROL SCHEME 02-------------------------*/
+
+-->
+</style>
+
+
+
+
+</head>
+
+<body onLoad="MM_effectGrowShrink('legal_Panel', 1000, '400px', '100px', false, false, true)">
+
+<div class="container">
+  <div class="header"> 
+<!-- end .header --></div>
+
+  <div class="content">
+      
+    <h1>Introduction</h1>
+<p></p>
+      
+     <!-- <div id="mediaPlayer"> 
+      <h2>Media Player</h2>
+ <!-- Controls/Interface for mpControlScheme01 (uses mpcontrols.js)-->
+ <!-- {{{{{{{MP CONTROL SCHEME 01}}}}}}} -->
+  <!--   <audio id="myTrack" >
+      	<source src="CMO_P-Music/Winner.mp3"type="audio/mp3"/>
+      </audio>
+      <nav>
+       <div id="defaultBar">
+       <div id ="progressBar"></div>
+       </div>
+       <div id="buttons">
+       <button type="button" id="playButton" ></button>
+       <button type="button" id="muteButton"></button>
+        <span id="currentTime">0:00</span>
+        /<span id="fullDuration">0:00</span>
+        </div>
+      </nav>-->
+    
+    <!--Controls/Interface for mpControlScheme02 (uses mpcontrols-alt.js)-->
+     <!-- {{{{{{{MP CONTROL SCHEME 01}}}}}}} -->
+   
+      
+      
+     
+  
+
+<div id="AdvOptions">
+ <div id="m_Player">  
+   
+   
+ <div id="trackwrap">
+ <div id="infowrap">
+     <div id="textbox">
+        <h4 id= "playlist_status" style= "color: #FFF"> Click A Track </h4>
+     </div>   
+  </div>
+   <select id="trackbox" size="8">
+     <option value="AfterMe.mp3" >After Me</option>
+     <option value="All In.mp3">All In</option>
+     <option value="Baddest Bitch.mp3">Baddest Bitch</option>
+     <option value="Beach Cruiser.mp3">Beach Cruiser</option>
+     <option value="Bi-Coastal.mp3">Bi-Coastal</option>
+     <option value="Biz_as_usual.mp3">Biz_as_usual</option>
+     <option value="Bottles.mp3">Bottles</option>
+     <option value="Destined.mp3">Destined</option>
+     <option value="Functional Fire.mp3">Functional Fire</option>
+     <option value="hands_up.mp3">hands_up</option>
+     <option value="Hijinx.mp3">Hijinx</option>
+     <option value="In My Mind.mp3">In My Mind</option>
+     <option value="Justify.mp3">Justify</option>
+     <option value="Like Neon.mp3">Like Neon</option>
+     <option value="Make It Count.mp3">Make It Count</option>
+     <option value="Numbers.mp3">Numbers</option>
+     <option value="Position2.mp3">Position2</option>
+     <option value="Posted.mp3">Posted</option>
+     <option value="Red Eye.mp3">Red Eye</option>
+     <option value="Refresher.mp3">Refresher</option>
+     <option value="Rendezvous.mp3">Rendezvous</option>
+     <option value="Rise.mp3">Rise</option>
+     <option value="Small Talk.mp3">Small Talk</option>
+     <option value="StarStruck.mp3">StarStruck</option>
+     <option value="Switch Up.mp3">Switch Up</option>
+     <option value="ThatThang.mp3">ThatThang</option>
+     <option value="The Scene.mp3">The Scene</option>
+     <option value="Try Me.mp3">Try Me</option>
+     <option value="Try This.mp3">Try This</option>
+     <option value="Turfin.mp3">Turfin</option>
+     <option value="Turn It Loose.mp3">Turn It Loose</option>
+     <option value="U and I.mp3">U and I</option>
+     <option value="Uncommon Sense.mp3">Uncommon Sense</option>
+     <option value="Up and Up.mp3">Up and Up</option>
+     <option value="Up For It.mp3">Up For It</option>
+     <option value="Winner.mp3">Winner</option>
+   </select>
+   <div id="buyLinks">
+      <div id="addToCart" onlick="paypal.com"><img src="images/CMO_P-buyLinks-S-Cart.png" width="43" height="42" alt="add to cart"></div>
+<div id="soundCloud" onClick="soundCloud.com"><img src="images/CMO_P-buyLinks-S-Cloud.png" width="49" height="52" alt="to soundcloud.com"></div>
+   <div id="eMail" onClick="google.com"><img src="images/CMO_P-buyLinks-E-mail.png" width="49" height="52" alt="to email"></div>
+   </div>
+     </div>
+
+
+
+  <div id="audio_player">
+    
+    <input id="seekslider" type="range" min="0" max="500" value="0" step="1">
+  
+  	<div id="audio_controls">
+    <div id="rightspeaker"></div>
+   <div id="leftspeaker"></div> 
+    <div id="main">
+    <button id="playpausebtn"></button>
+   
+           
+        <button id="mutebtn"></button>
+        
+        <div id="timebox">
+    	<span id="curtimetext">00.00</span>/<span id="durtimetext">00.00</span>
+        </div>
+     <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
+      </div>
+    </div>
+	<script type="text/javascript" src="mpcontrols-alt.js"></script>
+</div>
+</div>
+
+
+  </div>
+   <div id="legal_Panel">
+    </div>
+  </div>   
+ 
+ <div class="footer">
+    <p>Links</p>
+    
+  <!-- end .footer --></div>
+<!-- end .container --></div>
+
+
+</body>
+</html>
